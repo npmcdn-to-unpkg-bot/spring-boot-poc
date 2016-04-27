@@ -1,0 +1,27 @@
+<div class="container">
+	<form (ngSubmit) = "onSubmit(id.value, str.value, num.value, d.value)" #demoForm="ngForm">
+		<div class="form-group">
+			<label for="long_id">long Id</label>
+			<input type="text" class="form-control" [(ngModel)]="model.id" #id required>
+		</div>
+
+		<div class="form-group">
+			<label for="string_str">String str</label>
+			<input type="text" class="form-control" [(ngModel)]="model.str" #str required>
+		</div>
+
+		<div class="form-group">
+			<label for="int_num">int num</label>
+			<input type="text" class="form-control" [(ngModel)]="model.num" #num required>
+		</div>
+
+		<div class="form-group">
+			<label for="double_d">double d</label>
+			<input type="text" class="form-control" [(ngModel)]="model.d" #d required>
+		</div>
+
+		<button type="submit" class="btn btn-default" [disabled]="!demoForm.form.valid">Submit</button>
+
+		<div><p>{{msg}}</p></div>
+	</form>
+</div>

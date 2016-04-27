@@ -1,0 +1,16 @@
+<div class="container">
+	<!--p>Displaying data from GET request</p>
+	<p>long ID: {{msg.id}}</p>
+	<p>String str: {{msg.str}}</p>
+	<p>int num: {{msg.num}}</p>
+	<p>double d: {{msg.d}}</p-->
+	
+	<h1>CRUD operations :-</h1>
+	<nav>
+		<a [routerLink] = "['Create']">Create a demo bean</a>
+		<a [routerLink] = "['Read']">View a demo bean</a>
+		<a [routerLink] = "['Update']">Modify a demo bean</a>
+		<a [routerLink] = "['Delete']">Delete a demo bean</a>
+	</nav>
+	<router-outlet></router-outlet>
+</div>

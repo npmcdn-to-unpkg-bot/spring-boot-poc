@@ -1,0 +1,16 @@
+<div class="container">
+	<table class = "table">
+		<tr class = "success">
+			<th>long Id</th>
+			<th>String str</th>
+			<th>int num</th>
+			<th>double d</th>
+		</tr>
+		<tr *ngFor = "#demoBean of demoBeans" class = "active">
+			<td>{{demoBean.id}}</td>
+			<td>{{demoBean.str}}</td>
+			<td>{{demoBean.num}}</td>
+			<td>{{demoBean.d}}</td>
+		</tr>
+	</table>
+</div>

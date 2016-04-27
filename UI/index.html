@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/">
+        <title>Template Syntax</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="app/styles.css" />
+        <!-- IE required polyfills, in this exact order -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.26/system-polyfills.js"></script>
+        <script src="https://npmcdn.com/angular2@2.0.0-beta.15/es6/dev/src/testing/shims_for_IE.js"></script>
+        
+        <script src="https://code.angularjs.org/2.0.0-beta.15/angular2-polyfills.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.26/system.js"></script>
+        <script src="https://npmcdn.com/typescript@1.8.10/lib/typescript.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.15/Rx.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.15/angular2.dev.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.0/http.dev.js"></script>
+        <script src="node_modules/angular2/bundles/router.dev.js"></script>
+        <script>
+            System.config({
+                transpiler: 'typescript',
+                typescriptOptions: { emitDecoratorMetadata: true },
+                packages: {'app' : {defaultExtension: 'ts'}}
+            });
+            System.import('app/main').then(null, console.error.bind(console));
+        </script>
+    </head>
+    
+    <body>
+        <my-app>Loading...</my-app>
+    </body>
+</html>
+
+
