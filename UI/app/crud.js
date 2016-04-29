@@ -1,4 +1,4 @@
-System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/operator/map', 'angular2/common'], function(exports_1, context_1) {
+System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/operator/map', 'angular2/common', 'rxjs/Observable'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, DemoBean_1, http_1, common_1;
+    var core_1, DemoBean_1, http_1, common_1, Observable_1;
     var CreateComponent, ReadComponent, UpdateComponent, DeleteComponent;
     return {
         setters:[
@@ -26,13 +26,16 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
             function (_1) {},
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (Observable_1_1) {
+                Observable_1 = Observable_1_1;
             }],
         execute: function() {
             CreateComponent = (function () {
                 function CreateComponent(http) {
+                    this.http = http;
                     //model = new DemoBean(123321, 1,'test',1.3);		//TODO - initialize blank form fields for these values.
                     this.model = new DemoBean_1.DemoBean(null, null, '', null);
-                    this.http = http;
                 }
                 CreateComponent.prototype.onSubmit = function (id, str, num, d) {
                     var _this = this;
@@ -83,14 +86,30 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                 DeleteComponent.prototype.onSubmit = function (id) {
                     var _this = this;
                     var headers = new http_1.Headers();
-                    headers.append('Content-Type', 'application/jsonp');
-                    this.http.get('http://localhost:8080/delete?id=' + id).map(function (data) { return data.text(); }, { headers: headers }).
-                        subscribe(function (response) { return _this.response = response; });
-                    this.errorFlag = (this.response == 'true');
-                    if (this.errorFlag == false)
+                    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+                    //this.http.get('http://localhost:8080/delete?id='+id).map(data => data.text(),{headers:headers}).subscribe(response => this.response = response);
+                    this.http.post('http://localhost:8080/delete', "id=" + id.toString(), { headers: headers }).map(function (data) { return data.text(); }).subscribe(function (response) { return _this.response = response; });
+                    if (this.response == 'false') {
                         this.msg = 'Bean with id : ' + id + ' not found in the database!';
-                    else
+                        this.errorFlag = false;
+                    }
+                    else {
                         this.msg = 'Bean with id : ' + id + ' successfully deleted from the database!';
+                        this.errorFlag = true;
+                    }
+                };
+                DeleteComponent.prototype.extractData = function (res) {
+                    if (res.status < 200 || res.status >= 300) {
+                        throw new Error('Bad response status: ' + res.status);
+                    }
+                    var body = res.json();
+                    return body.data || {};
+                };
+                DeleteComponent.prototype.handleError = function (error) {
+                    // In a real world app, we might send the error to remote logging infrastructure
+                    var errMsg = error.message || 'Server error';
+                    console.error(errMsg); // log to console instead
+                    return Observable_1.Observable.throw(errMsg);
                 };
                 DeleteComponent = __decorate([
                     core_1.Component({ templateUrl: './app/templates/deleteTemplate.html' }), 

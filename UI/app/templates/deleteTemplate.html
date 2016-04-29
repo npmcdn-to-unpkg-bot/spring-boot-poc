@@ -1,12 +1,12 @@
 <div class="container">
-	<form (ngSubmit) = "onSubmit(id.value)" #demoForm="ngForm">
-		<div class="form-group">
-			<label for="long_id">Enter the Bean Id to delete:</label>
-			<input type="text" class="form-control" #id required>
-		</div>
-
-		<button type="submit" class="btn btn-default" [disabled]="!demoForm.form.valid">Submit</button>
-
-		<div><p [ngClass]="errorFlag ? 'danger':'success'">{{msg}}</p></div>
-	</form>
+	
+	<br>
+	
+	<b>Enter the Bean ID to delete:</b>
+	<input type="text" class="form-control" #id required>
+	
+	<button (click)="onSubmit(id.value); id.value=''" class="btn btn-default">Submit</button>
+	
+	<div><p [ngClass]="errorFlag ? 'danger':'success'">{{msg}}</p></div>
+	
 </div>
