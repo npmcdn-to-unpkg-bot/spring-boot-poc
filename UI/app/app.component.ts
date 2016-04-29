@@ -8,7 +8,7 @@ import {CreateComponent, ReadComponent, UpdateComponent, DeleteComponent} from '
 @Component({
 	selector: 'my-app',
 	viewProviders: [HTTP_PROVIDERS],
-	templateUrl: 'app/template.html',
+	templateUrl: 'app/templates/template.html',
 	directives: [ROUTER_DIRECTIVES, CreateComponent, ReadComponent, UpdateComponent, DeleteComponent]
 })
 @RouteConfig([

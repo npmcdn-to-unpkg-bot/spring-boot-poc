@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map', 'ang
                     core_1.Component({
                         selector: 'my-app',
                         viewProviders: [http_1.HTTP_PROVIDERS],
-                        templateUrl: 'app/template.html',
+                        templateUrl: 'app/templates/template.html',
                         directives: [router_1.ROUTER_DIRECTIVES, crud_1.CreateComponent, crud_1.ReadComponent, crud_1.UpdateComponent, crud_1.DeleteComponent]
                     }),
                     router_1.RouteConfig([

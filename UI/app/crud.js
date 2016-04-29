@@ -1,4 +1,4 @@
-System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/operator/map', 'angular2/common'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, DemoBean_1, http_1;
+    var core_1, DemoBean_1, http_1, common_1;
     var CreateComponent, ReadComponent, UpdateComponent, DeleteComponent;
     return {
         setters:[
@@ -23,7 +23,10 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
             function (http_1_1) {
                 http_1 = http_1_1;
             },
-            function (_1) {}],
+            function (_1) {},
+            function (common_1_1) {
+                common_1 = common_1_1;
+            }],
         execute: function() {
             CreateComponent = (function () {
                 function CreateComponent(http) {
@@ -42,7 +45,8 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                 CreateComponent = __decorate([
                     core_1.Component({
                         selector: 'form',
-                        templateUrl: './app/createTemplate.html'
+                        directives: [common_1.FORM_DIRECTIVES],
+                        templateUrl: './app/templates/createTemplate.html'
                     }), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], CreateComponent);
@@ -55,7 +59,7 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                     http.get('http://localhost:8080/all').map(function (res) { return res.json(); }).subscribe(function (demoBeans) { return _this.demoBeans = demoBeans; });
                 }
                 ReadComponent = __decorate([
-                    core_1.Component({ templateUrl: './app/readTemplate.html' }), 
+                    core_1.Component({ templateUrl: './app/templates/readTemplate.html' }), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], ReadComponent);
                 return ReadComponent;
@@ -65,7 +69,7 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                 function UpdateComponent() {
                 }
                 UpdateComponent = __decorate([
-                    core_1.Component({ templateUrl: './app/updateTemplate.html' }), 
+                    core_1.Component({ templateUrl: './app/templates/updateTemplate.html' }), 
                     __metadata('design:paramtypes', [])
                 ], UpdateComponent);
                 return UpdateComponent;
@@ -79,8 +83,9 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                 DeleteComponent.prototype.onSubmit = function (id) {
                     var _this = this;
                     var headers = new http_1.Headers();
-                    headers.append('Content-Type', 'application/json');
-                    this.http.post('http://localhost:8080/delete', id.toString()).map(function (data) { return data.text(); }, { headers: headers }).subscribe(function (response) { return _this.response = response; });
+                    headers.append('Content-Type', 'application/jsonp');
+                    this.http.get('http://localhost:8080/delete?id=' + id).map(function (data) { return data.text(); }, { headers: headers }).
+                        subscribe(function (response) { return _this.response = response; });
                     this.errorFlag = (this.response == 'true');
                     if (this.errorFlag == false)
                         this.msg = 'Bean with id : ' + id + ' not found in the database!';
@@ -88,7 +93,7 @@ System.register(['angular2/core', './DemoBean', 'angular2/http', 'rxjs/add/opera
                         this.msg = 'Bean with id : ' + id + ' successfully deleted from the database!';
                 };
                 DeleteComponent = __decorate([
-                    core_1.Component({ templateUrl: './app/deleteTemplate.html' }), 
+                    core_1.Component({ templateUrl: './app/templates/deleteTemplate.html' }), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], DeleteComponent);
                 return DeleteComponent;
