@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entity.DemoBean;
+import app.entity.DemoBeanScala;
 import app.entity.DemoRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -26,19 +27,25 @@ public class DemoController
 	}
 
 	@RequestMapping("/demo")
-	public DemoBean demo(@RequestParam(value="id") Long Id, @RequestParam(value="str") String str, @RequestParam(value="num") int num, @RequestParam(value="d") double d)
+	public DemoBeanScala demo(@RequestParam(value="id") Long Id, @RequestParam(value="str") String str, @RequestParam(value="num") int num, @RequestParam(value="d") double d)
 	{
-		return new DemoBean(Id, str, num, d);
+		//return new DemoBean(Id, str, num, d);
+		DemoBeanScala dbs = new DemoBeanScala();
+		dbs.setId(123456);
+		dbs.setStr("sample text");
+		dbs.setNum(1);
+		dbs.setD(2.1);
+		return dbs;
 	}
 
 	@RequestMapping("/all")
-	public Iterable<DemoBean> listAll()
+	public Iterable<DemoBeanScala> listAll()
 	{
 		return repo.findAll();
 	}
 
 	@RequestMapping(value="/create", method={RequestMethod.POST})
-	public String createDemoBean(@RequestBody DemoBean demoBean)
+	public String createDemoBean(@RequestBody DemoBeanScala demoBean)
 	{
 		repo.save(demoBean);
 		return "Success";
@@ -47,7 +54,7 @@ public class DemoController
 	@RequestMapping(value="/delete", method={RequestMethod.POST}, consumes = "application/x-www-form-urlencoded", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean deleteDemoBean(@RequestParam("id") long id)
 	{
-		DemoBean beanToDelete = repo.findOne(id);
+		DemoBeanScala beanToDelete = repo.findOne(id);
 		if(beanToDelete == null)
 			return false;
 		else
