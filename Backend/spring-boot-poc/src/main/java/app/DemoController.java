@@ -35,6 +35,7 @@ public class DemoController
 		dbs.setStr("sample text");
 		dbs.setNum(1);
 		dbs.setD(2.1);
+		dbs.testFunc(dbs.pr());
 		return dbs;
 	}
 
