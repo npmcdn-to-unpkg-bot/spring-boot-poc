@@ -13,6 +13,8 @@ import app.entity.DemoBean;
 import app.entity.DemoBeanScala;
 import app.entity.DemoRepository;
 
+import java.util.funtion.Function;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class DemoController 
@@ -31,10 +33,10 @@ public class DemoController
 	{
 		//return new DemoBean(Id, str, num, d);
 		DemoBeanScala dbs = new DemoBeanScala();
-		dbs.setId(123456);
-		dbs.setStr("sample text");
-		dbs.setNum(1);
-		dbs.setD(2.1);
+		dbs.setId(Id);
+		dbs.setStr(str);
+		dbs.setNum(num);
+		dbs.setD(d);
 		dbs.testFunc(dbs.pr());
 		return dbs;
 	}
