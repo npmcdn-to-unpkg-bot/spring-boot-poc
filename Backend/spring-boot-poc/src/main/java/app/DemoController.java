@@ -13,7 +13,7 @@ import app.entity.DemoBean;
 import app.entity.DemoBeanScala;
 import app.entity.DemoRepository;
 
-import java.util.funtion.Function;
+import java.util.function.Function;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
