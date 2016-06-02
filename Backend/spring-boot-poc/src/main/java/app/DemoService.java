@@ -1,7 +1,5 @@
 package app;
 
-import java.util.function.Function;
-
 import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +7,11 @@ import org.springframework.stereotype.Component;
 public class DemoService 
 {
 	
-	Function<String, String> capitalizeString = (s) -> {return WordUtils.capitalize(s);};
+	String resourceURL = "https://api.twitter.com/1.1/search/tweets.json?q=%40thehindu&src=typd";
 	
 	public String formatString(String inputStr)
 	{
-		return capitalizeString.apply(inputStr);
+		return WordUtils.capitalize(inputStr);
 	}
 
 }
