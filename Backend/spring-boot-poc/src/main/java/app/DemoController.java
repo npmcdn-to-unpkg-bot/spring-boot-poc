@@ -13,7 +13,6 @@ import app.entity.DemoBean;
 import app.entity.DemoRepository;
 
 
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class DemoController 
